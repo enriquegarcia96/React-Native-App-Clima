@@ -1,4 +1,4 @@
-# React Native App Clima
+# React Native App Clima, Usando Animaciones en React Native
 
 
 # Dependencias a instalar
