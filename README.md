@@ -1,5 +1,8 @@
-# React Native App Clima, Usando Animaciones en React Native
+# React Native ⚛️ App Clima, Usando Animaciones en React Native
 
+# Introduccion a React Native, usando una API de Crypto API 
+
+![image](https://user-images.githubusercontent.com/46203192/113376813-dd458980-932f-11eb-8702-32795f9ee45a.png)
 
 # Dependencias a instalar
 ### `npm i @react-native-community/picker`
