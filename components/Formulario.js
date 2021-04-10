@@ -3,10 +3,10 @@ import { Text, View, StyleSheet, TextInput,TouchableWithoutFeedback, Animated, A
 import { Picker } from '@react-native-community/picker';
 
 
-const Formulario = ( { busqueda, guardarBusqueda } ) => {
+const Formulario = ( { busqueda, guardarBusqueda, guardarConsultar } ) => {
 
-    //--- destructuro el objeto de usestare ---//
-    const { pais, ciudad } = busqueda;
+    //--- destructuro el objeto de useState ---//
+    const { ciudad, pais  } = busqueda;
 
 
     //--- para poner animaciones ---//
@@ -18,6 +18,8 @@ const Formulario = ( { busqueda, guardarBusqueda } ) => {
             mostrarAlerta();
             return;
         }
+        //--- consultar la API ---//
+        guardarConsultar(true)
 
     }
 
@@ -33,7 +35,6 @@ const Formulario = ( { busqueda, guardarBusqueda } ) => {
     //--- funciones de las animaciones de entrada y salida ---//
     //--- solo se pueden utilizar dentro de TouchableWithoutFeedback ---//
     const animacionEntrada = () => {
-        //console.log('entrada...')
 
         Animated.spring( animacionBoton, {
             toValue: .75, //aqui puedo hacer que  el boton se haga mas pequeño
@@ -44,7 +45,6 @@ const Formulario = ( { busqueda, guardarBusqueda } ) => {
 
 
     const animacionSalida = () => {
-        //console.log('salida...')
 
         //--- Animacion ---//
         Animated.spring(animacionBoton, {
@@ -71,8 +71,8 @@ const Formulario = ( { busqueda, guardarBusqueda } ) => {
                         style={styles.input}
 
                         //permite leer lo que el usuario escriba
-                        onChangeText={ NuevaCiudad => guardarBusqueda({...busqueda,
-                            NuevaCiudad}) }                              //^ copia del state
+                        onChangeText={ ciudad => guardarBusqueda({...busqueda,
+                            ciudad}) }                              //^ copia del state
                         placeholder='Ciudad'
                         placeholderTextColor='#666'//le da un color al texto del input
                     />
@@ -81,12 +81,13 @@ const Formulario = ( { busqueda, guardarBusqueda } ) => {
 
                 <View>
                     <Picker
+                        style={ styles.paises }
                         selectedValue={ pais }
                         itemStyle={{ height: 120, backgroundColor: '#FFF' }}
-                        onValueChange={ NuevoPais => guardarBusqueda({ ...busqueda, 
-                            NuevoPais }) }                                    //^ copia del state
+                        onValueChange={ pais => guardarBusqueda({ ...busqueda, 
+                            pais }) }                                    //^ copia del state
                     >
-                        <Picker.Item label='-- Seleccione Un País --' value=''/>
+                        <Picker.Item  label='-- Seleccione Un País --' value=''/>
                         <Picker.Item label='Honduras' value='HN' />
                         <Picker.Item label='Estados Unidos' value='US' />
                         <Picker.Item label='México' value='MX' />
@@ -121,7 +122,8 @@ const styles = StyleSheet.create({
         backgroundColor: '#FFF',
         fontSize: 20,
         marginBottom: 20,
-        textAlign: 'center'
+        textAlign: 'center',
+        fontFamily: 'Coiny-Regular',
     },
     btnBuscar:{
         marginTop: 50,
@@ -135,6 +137,10 @@ const styles = StyleSheet.create({
         textTransform: 'uppercase',
         textAlign: 'center',
         fontSize: 18
+    },
+    paises: {
+        fontWeight: 'bold',
+        color:'#1e212d'
     }
 })
 
